@@ -8,6 +8,7 @@ logs
 *.rar
 *.tar
 *.zip
+Thumbs.db
 
 
 # Node/Webpack
@@ -22,23 +23,5 @@ pids
 *.tgz
 *.hotpush.json
 
-
-# Wordpress
-wp-config.php
-wp-content/advanced-cache.php
-wp-content/backup-db/
-wp-content/backups/
-wp-content/blogs.dir/
-wp-content/cache/
-wp-content/upgrade/
-wp-content/uploads/
-wp-content/wp-cache-config.php
-wp-content/plugins/hello.php
-wp-content/plugins
-wp-content/themes/awesome-theme
-wordpress/wp-config.php
-/.htaccess
-/license.txt
-/readme.html
-/sitemap.xml
-/sitemap.xml.gz
+# Bower
+bower_components

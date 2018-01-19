@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "description": "Build Wordpress themes using Webpack and Hot Module Reloading",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "sass-mq": "^4.0.2",
+    "scut": "^1.4.0"
+  },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "babel-loader": "^6.2.5",
@@ -26,7 +29,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack-configs/webpack.prod.js",
-    "dev": "webpack-dashboard -- webpack-dev-server --inline --hot --port=3000 --config webpack-configs/webpack.dev.js",
+    "dev": "webpack-dashboard --minimal -- webpack-dev-server --inline --hot --port=3000 --config webpack-configs/webpack.dev.js",
     "setup": "cd wordpress && wp core download && cd ..",
     "stage": "webpack --config webpack-configs/webpack.stage.js"
   }

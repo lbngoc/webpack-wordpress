@@ -12,15 +12,16 @@ exports.compiler = {
 
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/wordpress/wp-content/themes/' + THEME_NAME + '/assets',
-    publicPath: '/wp-content/themes/' + THEME_NAME + '/assets',
+    path: __dirname + '/wordpress/wp-content/themes/' + THEME_NAME + '/assets/',
+    publicPath: '/wp-content/themes/' + THEME_NAME + '/assets/',
   },
 
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel?presets=es2015', exclude: /node_modules/ },
-      { test: /\.sass$/, loaders: ['style', 'css', 'postcss?sourceMap=inline', 'sass'], exclude: /node_modules/, },
-      { test: /\.(png|jpg)$/, loader: 'url?limit=10000', exclude: /node_modules/, }
+      { test: /\.(scss|sass)$/, loaders: ['style', 'css', 'postcss?sourceMap=inline', 'sass'], exclude: /node_modules/, },
+      { test: /\.(png|jpg)$/, loader: 'url?limit=10000', exclude: /node_modules/, },
+      { test: /\.(ttf|eot|woff|woff2)$/, loader: 'url?limit=10000', exclude: /node_modules/, }
     ]
   },
 
