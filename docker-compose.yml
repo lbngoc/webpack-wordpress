@@ -1,0 +1,47 @@
+
+version: '3'
+services:
+  db:
+    image: mysql:5.6
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    # restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: ${DB_HOST:-wordpress}
+      MYSQL_USER: ${DB_USERNAME:-wordpress}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-wordpress}
+
+  wordpress:
+    build:
+      context: configs
+    depends_on:
+      - db
+    # image: wordpress:4.7.5-apache
+    volumes:
+      - "~/.ssh:/root/.ssh"
+      - "~/.wp-cli:/root/.wp-cli"
+      - "./configs/server.conf:/etc/apache2/sites-available/000-default.conf"
+      - "./configs/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro"
+      - "./src:/var/www/html/wp-content/themes/${WPSITE_THEME_NAME:-wpresspack}:ro"
+      - "./www/.htaccess:/var/www/html/.htaccess:ro"
+      # - "./data/logs:/var/log/wpresspack"
+      # - "./www:/var/www/html"
+    links:
+      - db
+    extra_hosts:
+      - "{$SITE_URL}:172.18.0.1"
+    ports:
+      - "80:80"
+      - "443:443"
+    # restart: always
+    working_dir: /var/www/html
+    env_file:
+      - ".env"
+    environment:
+      APACHE_LOG_DIR: /var/log/wpresspack
+      WORDPRESS_DB_HOST: ${DB_HOST:-db}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-wordpress}
+
+# Enable https
+# https://github.com/docker-library/wordpress/issues/46

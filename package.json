@@ -1,36 +1,37 @@
 {
-  "name": "webpack-wordpress",
-  "author": "Sloan Sparger",
-  "version": "0.0.0",
-  "description": "Build Wordpress themes using Webpack and Hot Module Reloading",
-  "main": "index.js",
+  "name": "wpresspack",
+  "version": "2.0.0",
+  "description": "Wordpress, Docker, Webpack, Win.",
+  "scripts": {
+    "setup": "docker-compose exec -u www-data wordpress sh -c 'wp core install --title=$WPSITE_TITLE --url=$WPSITE_URL --admin_user=$WPSITE_ADMIN_USER --admin_password=$WPSITE_ADMIN_PASSWORD --admin_email=$WPSITE_ADMIN_EMAIL --skip-email && wp core version && wp theme activate $WPSITE_THEME_NAME'",
+    "serve": "docker-compose up -d && npm run start",
+    "ssh": "docker-compose exec -u www-data wordpress bash",
+    "ssh:root": "docker-compose exec wordpress bash",
+    "start": "NODE_ENV=development node ./configs/start.js",
+    "build": "NODE_ENV=production node ./configs/build.js",
+    "postinstall": "cp .env.sample .env && echo '### Edit your .ENV file then run `npm run setup`' to continue..."
+  },
+  "author": "ngoclb",
+  "license": "MIT",
   "dependencies": {
-    "sass-mq": "^4.0.2",
-    "scut": "^1.4.0"
+    "dotenv": "^5.0.1",
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
-    "autoprefixer": "^6.4.0",
-    "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.14.0",
-    "copy-webpack-plugin": "^3.0.1",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.9.0",
-    "node-sass": "^3.8.0",
-    "open-browser-webpack-plugin": "0.0.2",
-    "postcss-loader": "^0.11.0",
-    "sass-loader": "^4.0.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dashboard": "^0.1.8",
-    "webpack-dev-server": "^1.14.0",
-    "write-file-webpack-plugin": "^3.1.8",
-    "babel-core": "^6.13.2",
-    "url-loader": "^0.5.7"
-  },
-  "scripts": {
-    "build": "webpack --config webpack-configs/webpack.prod.js",
-    "dev": "webpack-dashboard --minimal -- webpack-dev-server --inline --hot --port=3000 --config webpack-configs/webpack.dev.js",
-    "setup": "cd wordpress && wp core download && cd ..",
-    "stage": "webpack --config webpack-configs/webpack.stage.js"
+    "assets-webpack-plugin": "^3.5.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "browser-sync": "^2.18.8",
+    "browser-sync-webpack-plugin": "^1.1.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "node-sass": "^4.3.0",
+    "postcss-loader": "^1.3.3",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.4.1"
   }
 }

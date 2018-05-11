@@ -25,3 +25,7 @@ pids
 
 # Bower
 bower_components
+
+# Local data
+.env
+.data
